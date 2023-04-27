@@ -14,16 +14,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class OrderingBasketController extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-
+    DecimalFormat df = new DecimalFormat("#.##");
     private Order order;
     private ArrayList<Order> orderList;
-    private Intent data;
+    private Intent dataIntent;
     private ArrayAdapter<String> adapter;
 
     ListView listview;
@@ -41,14 +40,14 @@ public class OrderingBasketController extends AppCompatActivity implements Adapt
         order = (Order) getIntent().getSerializableExtra("currentOrder");
         orderList = (ArrayList<Order>) getIntent().getSerializableExtra("allOrders");
 
-        data = new Intent();
-        data.putExtra("order", order);
-        data.putExtra("allOrders", orderList);
-        setResult(RESULT_OK, data);
+        dataIntent = new Intent();
+        dataIntent.putExtra("order", order);
+        dataIntent.putExtra("allOrders", orderList);
+        setResult(RESULT_OK, dataIntent);
 
         subTotal = findViewById(R.id.subTotal);
-        taxAmount = findViewById(R.id.taxAmount);
-        totalPrice = findViewById(R.id.totalPrice);
+        taxAmount = findViewById(R.id.taxText);
+        totalPrice = findViewById(R.id.totalText);
         listview = findViewById(R.id.listview);
         setListView();
         updatePrices();
@@ -59,17 +58,15 @@ public class OrderingBasketController extends AppCompatActivity implements Adapt
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Delete Item");
-        alert.setMessage("Would you like to delete this item?");
+        alert.setTitle("Delete");
+        alert.setMessage("Delete this Item?");
         alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 order.getItemList().remove(i);
                 setListView();
                 updatePrices();
             }
-        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {}
-        });
+        }).setNegativeButton("no", (dialog, which) -> {});
         AlertDialog dialog = alert.create();
         dialog.show();
     }
@@ -85,15 +82,15 @@ public class OrderingBasketController extends AppCompatActivity implements Adapt
 
     public void placeOrder(View view) {
         if (order.getItemList().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Order Cannot Be Empty!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Order Cannot Be Empty", Toast.LENGTH_SHORT).show();
             return;
         }
         orderList.add(order);
         order = new Order(order.getOrderNum() + 1);
-        data.putExtra("order", order);
+        dataIntent.putExtra("order", order);
         setListView();
         updatePrices();
-        Toast.makeText(getApplicationContext(), "Order Successfully Added", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Order Added", Toast.LENGTH_SHORT).show();
     }
 
     private void setListView() {
@@ -107,10 +104,9 @@ public class OrderingBasketController extends AppCompatActivity implements Adapt
     }
 
     private void updatePrices() {
-        subTotal.setText("$" + String.format("%.2f", order.getSubTotal()));
-        taxAmount.setText("$" + String.format("%.2f", order.getTaxAmount()));
-        totalPrice.setText("$" + String.format("%.2f", order.getFinalBill()));
-
+        taxAmount.setText("$" + df.format(order.getTaxAmount()));
+        totalPrice.setText("$" + df.format(order.getFinalPrice()));
+        subTotal.setText("$" + df.format(order.getSubTotal()));
     }
 
 }

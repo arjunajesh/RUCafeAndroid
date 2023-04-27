@@ -1,6 +1,5 @@
 package com.example.rucafe;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -77,24 +75,6 @@ public class StoreOrdersController extends AppCompatActivity {
         setListView();
         Toast.makeText(getApplicationContext(), "Order Successfully Cancelled", Toast.LENGTH_SHORT).show();
     }
-/*
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        alert.setTitle("Cancel Order");
-        alert.setMessage("Would you like cancel this order?");
-        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                orderList.remove(i);
-                setSpinner();
-                setListView();
-            }
-        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {}
-        });
-        AlertDialog dialog = alert.create();
-        dialog.show();
-    }*/
 
     private void setListView() {
         if (orderSpinner.getSelectedItem().toString().equals("")) {
@@ -120,9 +100,8 @@ public class StoreOrdersController extends AppCompatActivity {
             list[i] = selectedOrder.getItemList().get(i).toString();
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
-        //ordersListView.setOnItemClickListener(this);
         ordersListView.setAdapter(adapter);
-        totalOrderPrice.setText("$" + String.format("%.2f", selectedOrder.getFinalBill()));
+        totalOrderPrice.setText("$" + String.format("%.2f", selectedOrder.getFinalPrice()));
     }
 
     private void setSpinner() {

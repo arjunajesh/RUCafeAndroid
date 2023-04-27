@@ -9,55 +9,47 @@ import java.util.ArrayList;
  */
 public class Coffee extends MenuItems {
 
-    public static final double SHORT_COFFEE_PRICE = 1.89;
-    public static final double TALL_COFFEE_PRICE = 2.29;
-    public static final double GRANDE_COFFEE_PRICE = 2.69;
-    public static final double VENTI_COFFEE_PRICE = 3.09;
+    public static final double SHORT_PRICE = 1.89;
+    public static final double TALL_PRICE = 2.29;
+    public static final double GRANDE_PRICE = 2.69;
+    public static final double VENTI_PRICE = 3.09;
     public static final double ADD_INS_PRICE = 0.30;
 
-    private String cupSize;
-    private ArrayList<String> addIns;
-    private int amount;
+    private String size;
+    private ArrayList<String> addOns;
+    private int quantity;
     private int itemNum;
 
-    /**
-     * Default constructor for the Coffee Class.
-     */
-    public Coffee () {
-        cupSize = "";
-        addIns = null;
-        amount = 0;
-        itemNum = 0;
-    }
 
     /**
      * Constructor for when all parameters are provided.
-     * @param cupSize the size of cup
-     * @param addIns an ArrayList of the coffee's add-ins
-     * @param amount the amount of coffees that will be ordered
+     * @param size the size of cup
+     * @param addOns an ArrayList of the coffee's add-ins
+     * @param quantity the amount of coffees that will be ordered
      * @param itemNum a number used to keep track of separate orders with the same properties
      */
-    public Coffee (String cupSize, ArrayList<String> addIns, int amount, int itemNum) {
-        this.cupSize = cupSize;
-        this.addIns = addIns;
-        this.amount = amount;
+    public Coffee (String size, ArrayList<String> addOns, int quantity, int itemNum) {
+        this.size = size;
+        this.addOns = addOns;
+        this.quantity = quantity;
         this.itemNum = itemNum;
     }
 
     /**
-     * Gets the size of the cup as a String.
-     * @return the size of the cup
+     * Gets the amount of coffees in the coffee order and returns it as an integer.
+     * @return the amount of coffees
      */
-    public String getCupSize() {
-        return cupSize;
+    @Override
+    public int getQauntity() {
+        return quantity;
     }
 
     /**
      * Gets all the coffee's add-ins as an ArrayList of Strings.
      * @return the ArrayList of the add-ins
      */
-    public ArrayList<String> getAddIns() {
-        return addIns;
+    public ArrayList<String> getAddOns() {
+        return addOns;
     }
 
     /**
@@ -68,32 +60,18 @@ public class Coffee extends MenuItems {
         return itemNum;
     }
 
-    /**
-     * Increases the amount of coffees in the order.
-     * @param amount the amount of coffees that are added to the total amount
-     */
-    @Override
-    public void increaseAmount(int amount) {
-        this.amount = this.amount + amount;
-    }
 
     /**
-     * Decreases the amount of coffees in the order.
-     * @param amount the amount of coffees that are subtracted from the total amount
+     * Gets the size of the cup as a String.
+     * @return the size of the cup
      */
-    @Override
-    public void decreaseAmount(int amount) {
-        this.amount = this.amount - amount;
+    public String getSize() {
+        return size;
     }
 
-    /**
-     * Gets the amount of coffees in the coffee order and returns it as an integer.
-     * @return the amount of coffees
-     */
-    @Override
-    public int getAmount() {
-        return amount;
-    }
+
+
+
 
     /**
      * Calculates the price of an individual coffee using the size and amount of add-ins.
@@ -102,16 +80,20 @@ public class Coffee extends MenuItems {
     @Override
     public double itemPrice(){
         double price = 0.0;
-        if (cupSize.equals("Short")) {
-            price = SHORT_COFFEE_PRICE;
-        } else if (cupSize.equals("Tall")) {
-            price = TALL_COFFEE_PRICE;
-        } else if (cupSize.equals("Grande")) {
-            price = GRANDE_COFFEE_PRICE;
-        } else if (cupSize.equals("Venti")){
-            price = VENTI_COFFEE_PRICE;
+        switch(size){
+            case "Short":
+                price=SHORT_PRICE;
+                break;
+            case "Tall":
+                price=TALL_PRICE;
+                break;
+            case "Grande":
+                price=GRANDE_PRICE;
+            case "Venti":
+                price=VENTI_PRICE;
+                break;
         }
-        return price + (ADD_INS_PRICE*addIns.size());
+        return price + (ADD_INS_PRICE* addOns.size());
     }
 
     /**
@@ -125,8 +107,13 @@ public class Coffee extends MenuItems {
             return false;
         }
         Coffee checkCoffee = (Coffee) obj;
-        Boolean equalAddIns = checkCoffee.getAddIns().contains(this.addIns) && this.addIns.contains(checkCoffee.getAddIns());
-        return checkCoffee.getAmount() == this.amount && equalAddIns && checkCoffee.getCupSize().equals(this.cupSize) && checkCoffee.getItemNum() == this.itemNum;
+        Boolean equalAddIns = checkCoffee.getAddOns().contains(this.addOns) && this.addOns.contains(checkCoffee.getAddOns());
+        if(equalAddIns && checkCoffee.getQauntity() == this.quantity && checkCoffee.getSize().equals(this.size) && checkCoffee.getItemNum() == this.itemNum){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     /**
@@ -136,16 +123,14 @@ public class Coffee extends MenuItems {
     @Override
     public String toString() {
         String addInsString = "";
-        for(int i = 0; i < addIns.size(); i++) {
-            addInsString = addInsString + addIns.get(i);
-            if (i != addIns.size() - 1) {
-                addInsString = addInsString + ", ";
-            }
+        for(int i = 0; i < addOns.size(); i++) {
+            addInsString = addInsString + addOns.get(i);
+            if (i != addOns.size() - 1)
+                addInsString += ", ";
+
         }
-        if(addIns.isEmpty()) {
-            return getCupSize() + " Black Coffee (" + getAmount() + ") " + "Price: $" + String.format("%.2f", itemPrice()*amount);
-        }
-        return getCupSize() + " Coffee with " + addInsString + " (" + getAmount() + ") " + "Price: $" + String.format("%.2f", itemPrice()*amount);
+
+        return getSize() + " Coffee " + addInsString + "(" + getQauntity() + ") " + "Price: $" + String.format("%.2f", itemPrice()*quantity);
     }
 
 }

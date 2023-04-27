@@ -9,14 +9,14 @@
     tools:context=".OrderingBasketController">
 
     <TextView
-        android:id="@+id/totalPrice"
+        android:id="@+id/totalText"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
-        app:layout_constraintEnd_toEndOf="@+id/taxAmount"
-        app:layout_constraintStart_toStartOf="@+id/taxAmount"
+        app:layout_constraintEnd_toEndOf="@+id/taxText"
+        app:layout_constraintStart_toStartOf="@+id/taxText"
         app:layout_constraintTop_toTopOf="@+id/textView5" />
 
     <TextView
@@ -36,14 +36,14 @@
         android:id="@+id/listview"
         android:layout_width="307sp"
         android:layout_height="348sp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/placeOrderButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:layout_constraintVertical_bias="0.517" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/placeOrderButton"
         android:layout_width="269sp"
         android:layout_height="63sp"
         android:layout_marginBottom="24sp"
@@ -86,7 +86,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/taxAmount"
+        android:id="@+id/taxText"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"

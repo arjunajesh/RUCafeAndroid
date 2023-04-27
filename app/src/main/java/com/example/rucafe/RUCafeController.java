@@ -36,14 +36,11 @@ public class RUCafeController extends AppCompatActivity {
         if (allOrders == null) {
             allOrders = new ArrayList<>();
         }
-        ActivityResultCallback<ActivityResult> callback = new ActivityResultCallback<ActivityResult>() {
-            @Override
-            public void onActivityResult(ActivityResult result) {
-                if (result.getResultCode() == RESULT_OK) {
-                    Intent data = result.getData();
-                    currentOrder = (Order) data.getSerializableExtra("order");
-                    allOrders = (ArrayList<Order>) data.getSerializableExtra("allOrders");
-                }
+        ActivityResultCallback<ActivityResult> callback = result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                Intent data = result.getData();
+                currentOrder = (Order) data.getSerializableExtra("order");
+                allOrders = (ArrayList<Order>) data.getSerializableExtra("allOrders");
             }
         };
         resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), callback);
@@ -89,30 +86,6 @@ public class RUCafeController extends AppCompatActivity {
         intent.putExtra("currentOrder", currentOrder);
         intent.putExtra("allOrders", allOrders);
         resultLauncher.launch(intent);
-    }
-
-    /**
-     * Gets the list of all orders that have been made since the program began.
-     * @return an ArrayList of type Order that contains every order that has been placed
-     */
-    public ArrayList<Order> getAllOrders() {
-        return allOrders;
-    }
-
-    /**
-     * Gets the order that is currently being modified by the user.
-     * @return the order that is currently in use
-     */
-    public Order getCurrentOrder() {
-        return currentOrder;
-    }
-
-    /**
-     * Creates a new Order and replaces the currentOrder with the new one.
-     */
-    public void createNewOrder() {
-        Order newOrder = new Order(currentOrder.getOrderNum() + 1);
-        currentOrder = newOrder;
     }
 
 }

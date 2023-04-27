@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Order implements Serializable {
 
     public static final double TAX = 0.06625;
-    public static final int STARTING_ITEM_NUM = 0;
+    public static final int ITEM_NUM = 0;
 
     private int orderNum;
     private ArrayList<MenuItems> itemList;
@@ -22,7 +22,7 @@ public class Order implements Serializable {
     public Order() {
         orderNum = 0;
         this.itemList = new ArrayList<>();
-        this.itemNum = STARTING_ITEM_NUM;
+        this.itemNum = ITEM_NUM;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Order implements Serializable {
     public Order(int orderNum) {
         this.orderNum = orderNum;
         this.itemList = new ArrayList<>();
-        this.itemNum = STARTING_ITEM_NUM;
+        this.itemNum = ITEM_NUM;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Order implements Serializable {
      * @return itemNum as an integer
      */
     public int getItemNum() {
-        itemNum++;
+        itemNum+=1;
         return itemNum;
     }
 
@@ -67,7 +67,7 @@ public class Order implements Serializable {
      */
     public void addItem(MenuItems item) {
         itemList.add(item);
-        itemNum++;
+        itemNum+=1;
     }
 
     /**
@@ -83,9 +83,9 @@ public class Order implements Serializable {
      * @return the subtotal of the entire order as a double.
      */
     public double getSubTotal() {
-        double subTotal = 0.0;
+        double subTotal = 0;
         for (MenuItems item : itemList) {
-            subTotal = item.itemPrice()*item.getAmount() + subTotal;
+            subTotal += item.itemPrice()*item.getQauntity();
         }
         return subTotal;
     }
@@ -102,7 +102,7 @@ public class Order implements Serializable {
      * Calculates the cost of the final bill including the sub-total and the tax amount.
      * @return the cost of the final bill as a double
      */
-    public double getFinalBill() {
+    public double getFinalPrice() {
         return getSubTotal() + getTaxAmount();
     }
 

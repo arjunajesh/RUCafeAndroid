@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DonutPurchaseController extends AppCompatActivity {
 
     private static final String [] amountArray = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-            "19", "20", "21", "22", "23", "24", "25"};
+            "19", "20", "21", "22", "23"};
 
     private Order order;
     private ArrayList<Order> orderList;
@@ -87,7 +87,7 @@ public class DonutPurchaseController extends AppCompatActivity {
 
     private void updatePrice() {
         Donut donut = createDonut();
-        donutSubTotal.setText(String.format("$%.2f", donut.itemPrice()* donut.getAmount()));
+        donutSubTotal.setText(String.format("$%.2f", donut.itemPrice()* donut.getQauntity()));
         donutName.setText(donut.toStringDonutView());
     }
 
