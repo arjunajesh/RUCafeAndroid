@@ -14,12 +14,17 @@
         tools:targetApi="31">
         <activity
             android:name=".CoffeeController"
-            android:label="Order Coffee"
+            android:label="Coffees"
             android:parentActivityName="com.example.rucafe.RUCafeController"
             android:exported="false" />
         <activity
             android:name=".DonutController"
-            android:label="Order Donuts"
+            android:label="Donuts"
+            android:parentActivityName="com.example.rucafe.RUCafeController"
+            android:exported="false" />
+        <activity
+            android:name=".OrderingBasketController"
+            android:label="Orders Basket"
             android:parentActivityName="com.example.rucafe.RUCafeController"
             android:exported="false" />
         <activity
@@ -28,13 +33,8 @@
             android:parentActivityName="com.example.rucafe.RUCafeController"
             android:exported="false" />
         <activity
-            android:name=".OrderingBasketController"
-            android:label="Ordering Basket"
-            android:parentActivityName="com.example.rucafe.RUCafeController"
-            android:exported="false" />
-        <activity
             android:name=".DonutPurchaseController"
-            android:label="Order Donuts"
+            android:label="Donuts"
             android:parentActivityName="com.example.rucafe.DonutController"
             android:exported="false" />
         <activity

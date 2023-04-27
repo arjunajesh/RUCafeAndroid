@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEFD5"
+    android:background="#FFFFFF"
     tools:context=".DonutPurchaseController">
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="18sp"
         android:layout_marginTop="52sp"
         android:background="#F1F1F1"
-        android:text="@string/sub"
+        android:text="Subtotal: "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/donutAmountSpinner" />
@@ -38,8 +38,7 @@
         android:layout_marginTop="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/munchkins" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Spinner
         android:id="@+id/donutAmountSpinner"
@@ -71,7 +70,7 @@
         android:layout_height="50sp"
         android:layout_marginTop="98sp"
         android:onClick="addToOrder"
-        android:text="@string/add"
+        android:text="Add Order"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
