@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEFD5"
+    android:background="#FFFFFF"
     android:onClick="placeOrder"
     tools:context=".OrderingBasketController">
 
@@ -47,7 +47,7 @@
         android:layout_width="269sp"
         android:layout_height="63sp"
         android:layout_marginBottom="24sp"
-        android:text="@string/placeOrder"
+        android:text="Place Order"
         android:onClick="placeOrder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:text="@string/total"
+        android:text="Total: "
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12sp"
-        android:text="@string/tax"
+        android:text="Tax: "
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64sp"
-        android:text="@string/sub"
+        android:text="Subtotal: "
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.313"

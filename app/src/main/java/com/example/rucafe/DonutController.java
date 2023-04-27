@@ -34,10 +34,6 @@ public class DonutController extends AppCompatActivity {
             R.drawable.lemonfilled, R.drawable.sugar, R.drawable.oldfashioned, R.drawable.blueberry, R.drawable.cinnamonsugar,
             R.drawable.powdered, R.drawable.pumpkinfilled, R.drawable.butternut};
 
-    /*{R.drawable.strawberryfrosted, R.drawable.chocolatefrosted, R.drawable.jelly, R.drawable.glazed,
-            R.drawable.lemonfilled, R.drawable.sugar, R.drawable.oldfashioned, R.drawable.blueberry, R.drawable.cinnamonsugar,
-            R.drawable.powdered, R.drawable.pumpkin, R.drawable.butternut};*/
-
     private Order order;
     private ArrayList<Order> orderList;
     private Intent data;
